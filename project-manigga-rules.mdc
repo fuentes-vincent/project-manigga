@@ -67,14 +67,14 @@ alwaysApply: true
 # Important
 - Use yarn for dependency management
 
-# Folder Structure convention
+<!-- # Folder Structure convention
 - For each module use the following convention:
   ```
   module/                     # Replace with actual name of module (e.g. projects, members, sign-in)
   ├── components/             # React components related to the module
   ├── actions.ts              # Actions related to the module (e.g. getUser, createProject)
   ├── types.ts                # Typescript types related to the module
-  └── validations.ts          # Form validation schemas (if using validation libraries like zod)
+  └── validations.ts          # Form validation schemas (if using validation libraries like zod) -->
   ```
 
 
