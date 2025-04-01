@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
-import { ThemeToggle } from './theme/ThemeToggle'
+import { ThemeToggle } from '../../components/theme/ThemeToggle'
 
 export function LoginForm() {
   const [email, setEmail] = useState('')
