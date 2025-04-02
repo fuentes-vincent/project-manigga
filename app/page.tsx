@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -9,8 +8,8 @@ export default function Home() {
         <Link href="/login" className="bg-blue-500 text-white p-2 rounded-lg">
           Go to Login
         </Link>
-        <Link href="/project-dashboard" className="bg-green-500 text-white p-2 rounded-lg">
-          Project Dashboard
+        <Link href="/dashboard" className="bg-green-500 text-white p-2 rounded-lg">
+          Go to Dashboard
         </Link>
       </div>
     </main>
