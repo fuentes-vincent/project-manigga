@@ -10,9 +10,12 @@ import {
 } from 'lucide-react';
 import { useStore } from '../../stores/Store';
 import Link from 'next/link';
+import { Dashboard } from '../dashboard';
+import { usePathname } from 'next/navigation';
 
 const Sidebar: React.FC = () => {
   const { currentProject } = useStore();
+  const pathname = usePathname();
   
   return (
     <div className="w-64 bg-gray-800 text-white flex flex-col h-screen border-r border-gray-700">
@@ -30,7 +33,7 @@ const Sidebar: React.FC = () => {
           <li>
             <Link 
               href="/dashboard" 
-              className="sidebar-nav-item text-gray-300 hover:text-white"
+              className={`sidebar-nav-item ${pathname === '/dashboard' ? 'sidebar-nav-item-active text-white' : 'text-gray-300 hover:text-white'}`}
             >
               <LayoutDashboard size={18} className="mr-3" />
               Dashboard
@@ -40,7 +43,7 @@ const Sidebar: React.FC = () => {
           <li>
             <Link 
               href="/projects" 
-              className="sidebar-nav-item sidebar-nav-item-active text-white"
+              className={`sidebar-nav-item ${pathname === '/projects' || pathname === '/project-dashboard' ? 'sidebar-nav-item-active text-white' : 'text-gray-300 hover:text-white'}`}
             >
               <FolderOpenDot size={18} className="mr-3" />
               Projects
@@ -50,7 +53,7 @@ const Sidebar: React.FC = () => {
           <li>
             <Link 
               href="/tasks" 
-              className="sidebar-nav-item text-gray-300 hover:text-white"
+              className={`sidebar-nav-item ${pathname === '/tasks' ? 'sidebar-nav-item-active text-white' : 'text-gray-300 hover:text-white'}`}
             >
               <CheckSquare size={18} className="mr-3" />
               Tasks
@@ -60,7 +63,7 @@ const Sidebar: React.FC = () => {
           <li>
             <Link 
               href="/huddles" 
-              className="sidebar-nav-item text-gray-300 hover:text-white"
+              className={`sidebar-nav-item ${pathname === '/huddles' ? 'sidebar-nav-item-active text-white' : 'text-gray-300 hover:text-white'}`}
             >
               <Video size={18} className="mr-3" />
               Huddles
@@ -70,7 +73,7 @@ const Sidebar: React.FC = () => {
           <li>
             <Link 
               href="/team" 
-              className="sidebar-nav-item text-gray-300 hover:text-white"
+              className={`sidebar-nav-item ${pathname === '/team' ? 'sidebar-nav-item-active text-white' : 'text-gray-300 hover:text-white'}`}
             >
               <Users size={18} className="mr-3" />
               Team
@@ -80,7 +83,7 @@ const Sidebar: React.FC = () => {
           <li>
             <Link 
               href="/settings" 
-              className="sidebar-nav-item text-gray-300 hover:text-white"
+              className={`sidebar-nav-item ${pathname === '/settings' ? 'sidebar-nav-item-active text-white' : 'text-gray-300 hover:text-white'}`}
             >
               <Settings size={18} className="mr-3" />
               Settings
