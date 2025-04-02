@@ -18,9 +18,9 @@ export interface ProjectSlice {
 
 // Mock data for initial state
 const mockUsers: User[] = [
-  { id: '1', name: 'John Doe', avatar: '/avatars/avatar-1.png' },
-  { id: '2', name: 'Jane Smith', avatar: '/avatars/avatar-2.png' },
-  { id: '3', name: 'Bob Johnson', avatar: '/avatars/avatar-3.png' },
+  { id: '1', name: 'Victor Doe', avatar: '/images/avatars/boy.jpg' },
+  { id: '2', name: 'Jane Smith', avatar: '/images/avatars/girl-cry.jpg' },
+  { id: '3', name: 'Scarlett Johnson', avatar: '/images/avatars/girl-moan.jpg' },
 ];
 
 // Create the due date for April 3rd
