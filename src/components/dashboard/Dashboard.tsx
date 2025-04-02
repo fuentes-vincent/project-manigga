@@ -34,7 +34,7 @@ export const Dashboard: React.FC = () => {
       
       {/* Main content */}
       <div className="flex-1 overflow-auto p-6">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Good morning, Alex</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Good morning, Papi!</h1>
         
         {/* Metrics overview */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
