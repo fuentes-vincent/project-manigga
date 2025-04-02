@@ -35,7 +35,7 @@ const Sidebar: React.FC = () => {
 
   const navItems = [
     { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', pathCheck: '/dashboard' },
-    { href: '/projects', icon: FolderOpenDot, label: 'Projects', pathCheck: ['/projects', '/project-dashboard'] },
+    { href: '/project', icon: FolderOpenDot, label: 'Projects', pathCheck: ['/project', '/project-dashboard'] },
     { href: '/tasks', icon: CheckSquare, label: 'Tasks', pathCheck: '/tasks' },
     { href: '/huddles', icon: Video, label: 'Huddles', pathCheck: '/huddles' },
     { href: '/team', icon: Users, label: 'Team', pathCheck: '/team' },
