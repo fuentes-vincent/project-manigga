@@ -15,7 +15,6 @@ import {
 import { 
   DndContext, 
   DragEndEvent, 
-  DragOverEvent, 
   DragOverlay, 
   DragStartEvent, 
   PointerSensor, 
@@ -60,10 +59,6 @@ export const ProjectDashboard: React.FC = () => {
     if (taskToMove) {
       setActiveTask(taskToMove);
     }
-  };
-  
-  const handleDragOver = (/* event: DragOverEvent */) => {
-    // Optional: can be used to animate tasks shifting when hovering
   };
   
   const handleDragEnd = (event: DragEndEvent) => {
@@ -178,7 +173,6 @@ export const ProjectDashboard: React.FC = () => {
             <DndContext
               sensors={sensors}
               onDragStart={handleDragStart}
-              onDragOver={handleDragOver}
               onDragEnd={handleDragEnd}
             >
               <div className="grid grid-cols-4 gap-4 h-[calc(100vh-220px)]">
