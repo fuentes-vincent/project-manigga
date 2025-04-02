@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Bell, LayoutGrid, ListChecks, FolderKanban, Calendar, BarChartHorizontal } from 'lucide-react'
 
 export function TaskHeader() {
