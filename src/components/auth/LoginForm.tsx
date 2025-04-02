@@ -2,11 +2,11 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
-import { ThemeToggle } from '@/components/theme/ThemeToggle'
+import { Checkbox } from '@radix-ui/react-checkbox'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@radix-ui/react-tabs'
+import { ThemeToggle } from '../components/theme/ThemeToggle'
+import { Button } from '../components/ui/button'
+import { Input } from '../components/ui/input'
 
 export function LoginForm() {
   const [email, setEmail] = useState('')

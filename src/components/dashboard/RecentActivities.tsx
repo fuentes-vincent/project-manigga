@@ -82,7 +82,7 @@ const RecentActivities: React.FC = () => {
         </thead>
         <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
           {activities.map(activity => (
-            <tr key={activity.id} className="hover:bg-gray-50 dark:hover:bg-gray-750">
+            <tr key={activity.id} className="hover:bg-gray-500 dark:hover:bg-gray-750">
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm font-medium text-gray-900 dark:text-white">{activity.project}</div>
               </td>

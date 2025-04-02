@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ProjectDashboard } from '../../src/components/project';
+import { ProjectDashboard } from '@/components/project';
 
 export default function ProjectDashboardPage() {
   return (
