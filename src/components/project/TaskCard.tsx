@@ -3,6 +3,7 @@ import { Task, User } from '../../utils/types/project';
 import { MessageSquare, Paperclip, Calendar } from 'lucide-react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import Image from 'next/image';
 
 interface TaskCardProps {
   task: Task;
@@ -21,10 +22,12 @@ const AvatarGroup: React.FC<{ users: User[], max?: number }> = ({ users, max = 3
             key={user.id} 
             className="w-6 h-6 rounded-full border-2 border-gray-800 overflow-hidden"
           >
-            <img 
-              src={user.avatar} 
-              alt={user.name} 
+            <Image
+              src={user.avatar}
+              alt={user.name}
               className="w-full h-full object-cover"
+              width={24}
+              height={24}
             />
           </div>
         ))}

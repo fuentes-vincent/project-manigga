@@ -6,7 +6,6 @@ import {
   Users, 
   Briefcase, 
   CheckCircle2,
-  Calendar
 } from 'lucide-react';
 import './dashboard.css';
 // import MetricCard from './MetricCard';
@@ -16,7 +15,7 @@ import ProjectStatusChart from './ProjectStatusChart';
 import RecentActivities from './RecentActivities';
 
 export const Dashboard: React.FC = () => {
-  const { projects, tasks } = useStore();
+  // const { projects, tasks } = useStore()
   const [activeTimeframe, setActiveTimeframe] = useState<'1W' | '1M' | '3M' | '1Y'>('1M');
   
   // Mock data for metrics

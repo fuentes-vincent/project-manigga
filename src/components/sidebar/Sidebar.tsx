@@ -10,7 +10,6 @@ import {
 } from 'lucide-react';
 import { useStore } from '../../stores/Store';
 import Link from 'next/link';
-import { Dashboard } from '../dashboard';
 import { usePathname } from 'next/navigation';
 import './sidebar.css';
 

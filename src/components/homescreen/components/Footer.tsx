@@ -11,7 +11,7 @@ export function Footer() {
            <div className='flex items-center space-x-2 mb-4'>
               {/* Replace with actual logo if available */}
               <div className='w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold'>
-                P
+                M
               </div>
               <span className='font-semibold text-lg text-white'>Manigga</span>
            </div>

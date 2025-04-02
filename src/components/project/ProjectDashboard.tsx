@@ -22,7 +22,6 @@ import {
   useSensor, 
   useSensors 
 } from '@dnd-kit/core';
-import { arrayMove } from '@dnd-kit/sortable';
 import TaskCard from './TaskCard';
 import './project-dashboard.css';
 
@@ -32,8 +31,6 @@ export const ProjectDashboard: React.FC = () => {
     currentProject, 
     huddles,
     updateTaskStatus,
-    addTask,
-    addHuddle
   } = useStore();
   
   const [aiAssistantInput, setAiAssistantInput] = useState('');
@@ -65,7 +62,7 @@ export const ProjectDashboard: React.FC = () => {
     }
   };
   
-  const handleDragOver = (event: DragOverEvent) => {
+  const handleDragOver = (/* event: DragOverEvent */) => {
     // Optional: can be used to animate tasks shifting when hovering
   };
   
@@ -237,7 +234,7 @@ export const ProjectDashboard: React.FC = () => {
           <div className="w-80 border-l border-gray-800 p-6 bg-gray-800 overflow-y-auto">
             <div className="mb-6">
               <h2 className="text-lg font-medium text-white mb-4">
-                Today's Huddles
+                Today&apos;s Huddles
               </h2>
               
               <HuddlesList 
