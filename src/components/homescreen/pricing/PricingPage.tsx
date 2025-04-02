@@ -75,40 +75,43 @@ export function PricingPage() {
           {/* Pricing Cards */}
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto'>
             {currentPlans.map((plan, index) => (
-              <Card
-                key={index}
-                className={`flex flex-col ${plan.popular ? 'border-blue-500 border-2 shadow-lg' : 'border'}`}
-              >
-                {plan.popular && (
-                  <div className="text-center py-1 bg-blue-500 text-white text-sm font-medium rounded-t-lg -mt-px">Most Popular</div>
-                )}
-                <CardHeader className="items-center text-center pt-6">
-                  <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
-                  <div className="text-4xl font-bold mt-2">
-                    {plan.price}
-                    {plan.price !== 'Custom' && (
-                      <span className="text-base font-normal text-gray-500 dark:text-gray-400">/month</span>
-                    )}
-                  </div>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center">
-                        <Check className="h-4 w-4 mr-2 text-blue-500" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardFooter>
-                  {plan.custom ? (
-                    <Button variant="outline" className="w-full">Contact Sales</Button>
-                  ) : (
-                    <Button variant={plan.popular ? 'default' : 'outline'} className="w-full">Get Started</Button>
+              <div key={index} className="relative">
+                <Card
+                  className={`flex flex-col h-full ${plan.popular ? 'border-blue-500 border-2 shadow-lg pt-6' : 'border'}`}
+                >
+                  {plan.popular && (
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white text-sm font-semibold px-4 py-1 rounded-full shadow-md">
+                      Most Popular
+                    </div>
                   )}
-                </CardFooter>
-              </Card>
+                  <CardHeader className="items-center text-center pt-6">
+                    <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
+                    <div className="text-4xl font-bold mt-2">
+                      {plan.price}
+                      {plan.price !== 'Custom' && (
+                        <span className="text-base font-normal text-gray-500 dark:text-gray-400">/month</span>
+                      )}
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex-1">
+                    <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
+                      {plan.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center">
+                          <Check className="h-4 w-4 mr-2 text-blue-500" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                  <CardFooter>
+                    {plan.custom ? (
+                      <Button variant="outline" className="w-full">Contact Sales</Button>
+                    ) : (
+                      <Button variant={plan.popular ? 'default' : 'outline'} className="w-full">Get Started</Button>
+                    )}
+                  </CardFooter>
+                </Card>
+              </div>
             ))}
           </div>
 
