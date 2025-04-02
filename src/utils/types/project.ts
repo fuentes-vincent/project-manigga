@@ -29,6 +29,7 @@ export type Project = {
 export type Huddle = {
   id: string;
   title: string;
-  time: Date;
+  time: Date | string;
   participants: User[];
+  roomUrl?: string;
 }; 

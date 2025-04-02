@@ -22,6 +22,7 @@ import {
   useSensors 
 } from '@dnd-kit/core';
 import TaskCard from './TaskCard';
+import { VideoCallModal } from './VideoCallModal';
 import './project-dashboard.css';
 
 export const ProjectDashboard: React.FC = () => {
@@ -35,6 +36,9 @@ export const ProjectDashboard: React.FC = () => {
   const [aiAssistantInput, setAiAssistantInput] = useState('');
   const [activeTask, setActiveTask] = useState<Task | null>(null);
   const [activeView, setActiveView] = useState<'board' | 'list' | 'calendar'>('board');
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [currentHuddleUrl, setCurrentHuddleUrl] = useState<string | null>(null);
+  const [currentHuddleTitle, setCurrentHuddleTitle] = useState<string>('Huddle');
   
   // Group tasks by status
   const todoTasks = tasks.filter(task => task.status === 'todo');
@@ -82,18 +86,29 @@ export const ProjectDashboard: React.FC = () => {
   };
   
   const handleNewTask = () => {
-    // In a real app, this would open a modal or form
     console.log('Create new task');
   };
   
   const handleScheduleHuddle = () => {
-    // In a real app, this would open a modal or form
     console.log('Schedule new huddle');
   };
   
   const handleJoinHuddle = (huddleId: string) => {
-    // In a real app, this would join a video call
-    console.log('Join huddle', huddleId);
+    const huddleToJoin = huddles.find(h => h.id === huddleId);
+    if (huddleToJoin && huddleToJoin.roomUrl) {
+      setCurrentHuddleUrl(huddleToJoin.roomUrl);
+      setCurrentHuddleTitle(huddleToJoin.title);
+      setShowVideoModal(true);
+    } else {
+      console.error('Huddle or room URL not found!', huddleId);
+      // Handle error appropriately (e.g., show a notification)
+    }
+  };
+  
+  const handleCloseVideoModal = () => {
+    setShowVideoModal(false);
+    setCurrentHuddleUrl(null);
+    setCurrentHuddleTitle('Huddle');
   };
   
   const handleAiAssistantSubmit = (e: React.FormEvent) => {
@@ -271,6 +286,14 @@ export const ProjectDashboard: React.FC = () => {
           </div>
         </div>
       </div>
+      
+      {/* Video Call Modal */}
+      <VideoCallModal 
+        isOpen={showVideoModal} 
+        onClose={handleCloseVideoModal} 
+        roomUrl={currentHuddleUrl}
+        title={currentHuddleTitle}
+      />
     </div>
   );
 };

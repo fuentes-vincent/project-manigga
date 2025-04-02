@@ -90,12 +90,14 @@ const mockHuddles: Huddle[] = [
     title: 'Daily Standup',
     time: new Date(new Date().setHours(10, 0, 0, 0)),
     participants: [mockUsers[0], mockUsers[1], mockUsers[2]],
+    roomUrl: `${process.env.NEXT_PUBLIC_ROOM_URL_STANDUP}`,
   },
   {
     id: '2',
     title: 'Design Review',
     time: new Date(new Date().setHours(14, 0, 0, 0)),
     participants: [mockUsers[0], mockUsers[1], mockUsers[2]],
+    roomUrl: `${process.env.NEXT_PUBLIC_ROOM_URL_DESIGN_REVIEW}`,
   }
 ];
 
