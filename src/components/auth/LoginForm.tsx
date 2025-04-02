@@ -4,7 +4,6 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { Checkbox } from '@radix-ui/react-checkbox'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@radix-ui/react-tabs'
-import { ThemeToggle } from '../components/theme/ThemeToggle'
 import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input'
 
@@ -28,7 +27,6 @@ export function LoginForm() {
             <h2 className="text-2xl font-bold text-foreground">Welcome to Manigga</h2>
             <p className="text-muted-foreground">Your number one trusted platform</p>
           </div>
-          <ThemeToggle />
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-md space-y-6">
@@ -50,7 +48,6 @@ export function LoginForm() {
       <div className="flex flex-1 items-center justify-center p-6 bg-background">
         <div className="w-full max-w-md">
           <div className="flex justify-end mb-4 lg:hidden">
-            <ThemeToggle />
           </div>
           <div className="mb-8">
             <Tabs defaultValue="login" className="w-full">
