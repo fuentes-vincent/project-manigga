@@ -12,6 +12,7 @@ import { useStore } from '../../stores/Store';
 import Link from 'next/link';
 import { Dashboard } from '../dashboard';
 import { usePathname } from 'next/navigation';
+import './sidebar.css';
 
 const Sidebar: React.FC = () => {
   const { currentProject } = useStore();
@@ -42,8 +43,8 @@ const Sidebar: React.FC = () => {
           
           <li>
             <Link 
-              href="/projects" 
-              className={`sidebar-nav-item ${pathname === '/projects' || pathname === '/project-dashboard' ? 'sidebar-nav-item-active text-white' : 'text-gray-300 hover:text-white'}`}
+              href="/project" 
+              className={`sidebar-nav-item ${pathname === '/project' || pathname === '/project-dashboard' ? 'sidebar-nav-item-active text-white' : 'text-gray-300 hover:text-white'}`}
             >
               <FolderOpenDot size={18} className="mr-3" />
               Projects

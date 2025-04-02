@@ -56,24 +56,10 @@
   text-decoration: underline;
 }
 
+/* styles moved to src/components/sidebar/sidebar.css */
+
 /* Sidebar styles */
-.sidebar-nav-item {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.375rem;
-  margin-bottom: 0.25rem;
-  transition: background-color 0.2s;
-}
-
-.sidebar-nav-item:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.sidebar-nav-item-active {
-  background-color: #3182CE;
-  color: white;
-}
+/* styles moved to src/components/sidebar/sidebar.css */
 
 .project-progress-bar {
   height: 6px;

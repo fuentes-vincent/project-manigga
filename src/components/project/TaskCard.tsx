@@ -14,25 +14,28 @@ const AvatarGroup: React.FC<{ users: User[], max?: number }> = ({ users, max = 3
   const remainingCount = users.length - max;
   
   return (
-    <div className="flex -space-x-2">
-      {displayUsers.map((user) => (
-        <div 
-          key={user.id} 
-          className="w-6 h-6 rounded-full border-2 border-gray-800 overflow-hidden"
-        >
-          <img 
-            src={user.avatar} 
-            alt={user.name} 
-            className="w-full h-full object-cover"
-          />
-        </div>
-      ))}
-      {remainingCount > 0 && (
-        <div className="w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center text-xs font-medium border-2 border-gray-800 text-white">
-          +{remainingCount}
-        </div>
-      )}
-    </div>
+    <>
+      <div className="flex -space-x-2">
+        {displayUsers.map((user) => (
+          <div 
+            key={user.id} 
+            className="w-6 h-6 rounded-full border-2 border-gray-800 overflow-hidden"
+          >
+            <img 
+              src={user.avatar} 
+              alt={user.name} 
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ))}
+        {remainingCount > 0 && (
+          <div className="w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center text-xs font-medium border-2 border-gray-800 text-white">
+            +{remainingCount}
+          </div>
+        )}
+      </div>
+    </>
+      
   );
 };
 
