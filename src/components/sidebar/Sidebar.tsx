@@ -11,6 +11,7 @@ import {
   ChevronDown,
   ChevronsLeft,
   ChevronsRight,
+  Folders,
 } from 'lucide-react'
 import { useStore } from '../../stores/Store'
 import Link from 'next/link'
@@ -35,7 +36,8 @@ const Sidebar: React.FC = () => {
 
   const navItems = [
     { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', pathCheck: '/dashboard' },
-    { href: '/project', icon: FolderOpenDot, label: 'Projects', pathCheck: ['/project', '/project-dashboard'] },
+    { href: '/project-lists', icon: Folders, label: 'All Projects', pathCheck: ['/project-lists', '/project-list'] },
+    { href: '/project', icon: FolderOpenDot, label: 'Projects', pathCheck: ['/project', '/project-project'] },
     { href: '/tasks', icon: CheckSquare, label: 'Tasks', pathCheck: '/tasks' },
     { href: '/huddles', icon: Video, label: 'Huddles', pathCheck: '/huddles' },
     { href: '/team', icon: Users, label: 'Team', pathCheck: '/team' },

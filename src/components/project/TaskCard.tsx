@@ -72,6 +72,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onStatusChange }) => {
   };
   
   return (
+    <>
     <div 
       ref={setNodeRef}
       {...attributes}
@@ -122,6 +123,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onStatusChange }) => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

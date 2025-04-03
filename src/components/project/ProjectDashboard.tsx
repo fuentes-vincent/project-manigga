@@ -124,73 +124,74 @@ export const ProjectDashboard: React.FC = () => {
   
   return (
     <div className="flex h-screen project-dashboard-container">
-      {/* Sidebar */}
       <Sidebar />
-      
+
       {/* Main content */}
-      <div className="flex-1 overflow-hidden">
-        <div className="flex h-full">
-          {/* Project content */}
-          <div className="flex-1 p-6 overflow-hidden">
-            <h1 className="text-2xl font-bold text-white mb-4">Project Dashboard</h1>
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Header Area (Title, Tabs, Buttons) - Should be above the scrollable area */}
+        <div className="p-6 shrink-0">
+          <h1 className="text-2xl font-bold text-white mb-4">Project Dashboard</h1>
+          {/* Navigation tabs */}
+          <div className="flex mb-6 overflow-x-auto pb-2">
+            <button 
+              className={`py-2 px-4 flex items-center whitespace-nowrap ${activeView === 'board' ? 'nav-item-active' : 'text-gray-400'}`}
+              onClick={() => setActiveView('board')}
+            >
+              <LayoutGrid size={16} className="mr-2 shrink-0" />
+              Board
+            </button>
+            <button 
+              className={`py-2 px-4 flex items-center whitespace-nowrap ${activeView === 'list' ? 'nav-item-active' : 'text-gray-400'}`}
+              onClick={() => setActiveView('list')}
+            >
+              <List size={16} className="mr-2 shrink-0" />
+              List
+            </button>
+            <button 
+              className={`py-2 px-4 flex items-center whitespace-nowrap ${activeView === 'calendar' ? 'nav-item-active' : 'text-gray-400'}`}
+              onClick={() => setActiveView('calendar')}
+            >
+              <Calendar size={16} className="mr-2 shrink-0" />
+              Calendar
+            </button>
+          </div>
+          {/* Action buttons */}
+          <div className="flex flex-wrap gap-2 justify-end mb-6">
+            <button
+              onClick={handleScheduleHuddle}
+              className="flex items-center text-sm bg-gray-800 border border-gray-700 rounded-md px-3 py-1.5 text-gray-300"
+            >
+              <Calendar size={16} className="mr-1.5 shrink-0" />
+              Schedule Huddle
+            </button>
             
-            {/* Navigation tabs */}
-            <div className="flex mb-6">
-              <button 
-                className={`py-2 px-4 flex items-center ${activeView === 'board' ? 'nav-item-active' : 'text-gray-400'}`}
-                onClick={() => setActiveView('board')}
-              >
-                <LayoutGrid size={16} className="mr-2" />
-                Board
-              </button>
-              <button 
-                className={`py-2 px-4 flex items-center ${activeView === 'list' ? 'nav-item-active' : 'text-gray-400'}`}
-                onClick={() => setActiveView('list')}
-              >
-                <List size={16} className="mr-2" />
-                List
-              </button>
-              <button 
-                className={`py-2 px-4 flex items-center ${activeView === 'calendar' ? 'nav-item-active' : 'text-gray-400'}`}
-                onClick={() => setActiveView('calendar')}
-              >
-                <Calendar size={16} className="mr-2" />
-                Calendar
-              </button>
-            </div>
+            <button
+              onClick={handleNewTask}
+              className="flex items-center text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-md px-3 py-1.5"
+            >
+              <Plus size={16} className="mr-1.5 shrink-0" />
+              New Task
+            </button>
             
-            {/* Action buttons */}
-            <div className="flex justify-end space-x-2 mb-6">
-              <button
-                onClick={handleScheduleHuddle}
-                className="flex items-center text-sm bg-gray-800 border border-gray-700 rounded-md px-3 py-1.5 text-gray-300"
-              >
-                <Calendar size={16} className="mr-1.5" />
-                Schedule Huddle
-              </button>
-              
-              <button
-                onClick={handleNewTask}
-                className="flex items-center text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-md px-3 py-1.5"
-              >
-                <Plus size={16} className="mr-1.5" />
-                New Task
-              </button>
-              
-              <button
-                className="flex items-center text-sm bg-purple-600 hover:bg-purple-700 text-white rounded-md px-3 py-1.5"
-              >
-                <Sparkles size={16} className="mr-1.5" />
-                AI Assistant
-              </button>
-            </div>
-            
+            <button
+              className="flex items-center text-sm bg-purple-600 hover:bg-purple-700 text-white rounded-md px-3 py-1.5"
+            >
+              <Sparkles size={16} className="mr-1.5 shrink-0" />
+              AI Assistant
+            </button>
+          </div>
+        </div>
+        
+        {/* Main Scrollable Area (Board + Right Sidebar) */}
+        <div className="flex-1 flex overflow-hidden">
+          {/* Project content (Scrollable Board) */}
+          <div className="flex-1 p-6 pt-0 overflow-x-auto">
             <DndContext
               sensors={sensors}
               onDragStart={handleDragStart}
               onDragEnd={handleDragEnd}
             >
-              <div className="grid grid-cols-4 gap-4 h-[calc(100vh-220px)]">
+              <div className="grid grid-flow-col auto-cols-[minmax(280px,_1fr)] gap-4 h-full pb-4">
                 <div className="h-full">
                   <TaskColumn 
                     title="To Do" 
@@ -239,8 +240,8 @@ export const ProjectDashboard: React.FC = () => {
             </DndContext>
           </div>
           
-          {/* Right sidebar */}
-          <div className="w-80 border-l border-gray-800 p-6 bg-gray-800 overflow-y-auto">
+          {/* Right sidebar (Hidden on smaller screens) */}
+          <div className="hidden lg:block w-80 border-l border-gray-800 p-6 bg-gray-800 overflow-y-auto shrink-0">
             <div className="mb-6">
               <h2 className="text-lg font-medium text-white mb-4">
                 Today&apos;s Huddles
