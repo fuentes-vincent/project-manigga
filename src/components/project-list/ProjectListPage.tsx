@@ -117,10 +117,7 @@ function getStatusColorClasses(status: ProjectStatus): string {
 const ProjectCard: React.FC<{ project: ProjectCardData }> = ({ project }) => {
   return (
     <Card className="overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-white dark:bg-gray-800 rounded-lg border-none">
-      {/* Taller colored header */}
-      <div className={`h-20 ${project.color}`}></div> 
-      
-      <CardContent className="p-4"> {/* Removed flex, flex-col, flex-grow */}
+      <CardContent className="p-4">
         <h3 className="text-lg font-semibold mb-1 text-gray-900 dark:text-white">{project.title}</h3>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">{project.description}</p> {/* Removed flex-grow */} 
         
