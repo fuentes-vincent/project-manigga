@@ -3,14 +3,15 @@ import { Task, TaskStatus } from '../../utils/types/project';
 import { useStore } from '../../stores/Store';
 import TaskColumn from './TaskColumn';
 import HuddlesList from './HuddlesList';
+import AiComponent from './AiComponent';
 import { Sidebar } from '../sidebar';
 import { 
-  MessageSquare, 
   Calendar, 
   Plus, 
   Sparkles, 
   LayoutGrid, 
-  List, 
+  List,
+  X 
 } from 'lucide-react';
 import { 
   DndContext, 
@@ -33,12 +34,12 @@ export const ProjectDashboard: React.FC = () => {
     updateTaskStatus,
   } = useStore();
   
-  const [aiAssistantInput, setAiAssistantInput] = useState('');
   const [activeTask, setActiveTask] = useState<Task | null>(null);
   const [activeView, setActiveView] = useState<'board' | 'list' | 'calendar'>('board');
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [currentHuddleUrl, setCurrentHuddleUrl] = useState<string | null>(null);
   const [currentHuddleTitle, setCurrentHuddleTitle] = useState<string>('Huddle');
+  const [showAiAssistant, setShowAiAssistant] = useState(false);
   
   // Group tasks by status
   const todoTasks = tasks.filter(task => task.status === 'todo');
@@ -110,12 +111,9 @@ export const ProjectDashboard: React.FC = () => {
     setCurrentHuddleUrl(null);
     setCurrentHuddleTitle('Huddle');
   };
-  
-  const handleAiAssistantSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real app, this would send the query to an AI service
-    console.log('AI Assistant query:', aiAssistantInput);
-    setAiAssistantInput('');
+
+  const toggleAiAssistant = () => {
+    setShowAiAssistant(!showAiAssistant);
   };
   
   if (!currentProject) {
@@ -174,7 +172,8 @@ export const ProjectDashboard: React.FC = () => {
             </button>
             
             <button
-              className="flex items-center text-sm bg-purple-600 hover:bg-purple-700 text-white rounded-md px-3 py-1.5"
+              onClick={toggleAiAssistant}
+              className={`flex items-center text-sm ${showAiAssistant ? 'bg-purple-700' : 'bg-purple-600 hover:bg-purple-700'} text-white rounded-md px-3 py-1.5`}
             >
               <Sparkles size={16} className="mr-1.5 shrink-0" />
               AI Assistant
@@ -241,8 +240,8 @@ export const ProjectDashboard: React.FC = () => {
           </div>
           
           {/* Right sidebar (Hidden on smaller screens) */}
-          <div className="hidden lg:block w-80 border-l border-gray-800 p-6 bg-gray-800 overflow-y-auto shrink-0">
-            <div className="mb-6">
+          <div className="hidden lg:block w-96 border-l border-gray-800 p-6 bg-gray-800 overflow-y-auto shrink-0">
+            <div>
               <h2 className="text-lg font-medium text-white mb-4">
                 Today&apos;s Huddles
               </h2>
@@ -252,41 +251,30 @@ export const ProjectDashboard: React.FC = () => {
                 onJoin={handleJoinHuddle}
               />
             </div>
-            
-            <div>
-              <h2 className="text-lg font-medium text-white mb-4">
-                AI Assistant
-              </h2>
-              
-              <div className="bg-gray-900 rounded-lg p-4">
-                <div className="mb-4 max-h-60 overflow-y-auto">
-                  <div className="text-sm text-gray-400">
-                    Ask me anything about the project...
-                  </div>
-                </div>
-                
-                <form onSubmit={handleAiAssistantSubmit}>
-                  <div className="flex items-center space-x-2">
-                    <input
-                      type="text"
-                      value={aiAssistantInput}
-                      onChange={(e) => setAiAssistantInput(e.target.value)}
-                      placeholder="Type to create tasks..."
-                      className="flex-1 text-sm bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-gray-300"
-                    />
-                    <button
-                      type="submit"
-                      className="p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                    >
-                      <MessageSquare size={16} />
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
           </div>
         </div>
       </div>
+      
+      {/* AI Assistant Floating Chat */}
+      {showAiAssistant && (
+        <div className="fixed bottom-6 right-6 w-96 shadow-xl rounded-lg overflow-hidden z-50 bg-gray-900">
+          <div className="p-3 flex justify-between items-center border-b border-gray-800">
+            <h2 className="text-lg font-medium text-white flex items-center">
+              <Sparkles size={18} className="mr-2" />
+              Manigga AI Assistant
+            </h2>
+            <button 
+              onClick={toggleAiAssistant}
+              className="p-1 rounded-full hover:bg-gray-800 text-gray-400 hover:text-white"
+            >
+              <X size={18} />
+            </button>
+          </div>
+          <div className="h-[500px] max-h-[70vh]">
+            <AiComponent hideHeader={true} className="h-full" />
+          </div>
+        </div>
+      )}
       
       {/* Video Call Modal */}
       <VideoCallModal 

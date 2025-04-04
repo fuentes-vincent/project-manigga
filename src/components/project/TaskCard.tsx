@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Task, User } from '../../utils/types/project';
 import { MessageSquare, Paperclip, Calendar } from 'lucide-react';
