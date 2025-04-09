@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import {
   LayoutDashboard,
   FolderOpenDot,
-  CheckSquare,
   Users,
   Settings,
   Video,
@@ -38,7 +37,6 @@ const Sidebar: React.FC = () => {
     { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', pathCheck: '/dashboard' },
     { href: '/project-lists', icon: Folders, label: 'All Projects', pathCheck: ['/project-lists', '/project-list'] },
     { href: '/project', icon: FolderOpenDot, label: 'Projects', pathCheck: ['/project', '/project-project'] },
-    { href: '/tasks', icon: CheckSquare, label: 'Tasks', pathCheck: '/tasks' },
     { href: '/huddles', icon: Video, label: 'Huddles', pathCheck: '/huddles' },
     { href: '/team', icon: Users, label: 'Team', pathCheck: '/team' },
     { href: '/settings', icon: Settings, label: 'Settings', pathCheck: '/settings' },

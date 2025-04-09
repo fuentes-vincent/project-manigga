@@ -1,8 +1,6 @@
 'use client'
 
 import React from 'react'
-import { Sidebar } from '@/components/sidebar'
-import { TaskHeader } from './components/TaskHeader'
 import { TaskSidebar } from './components/TaskSidebar'
 import { TaskList } from './components/TaskList'
 import { Button } from "@/components/ui/button"
@@ -69,9 +67,8 @@ export function TaskPage() {
 
   return (
     <div className="flex h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
-      <Sidebar />
       <div className="flex-1 flex flex-col overflow-hidden">
-        <TaskHeader />
+        {/* <TaskHeader /> */}
         <main className="flex-1 flex overflow-hidden">
           <TaskSidebar />
           <div className="flex-1 flex flex-col overflow-auto p-6 space-y-6">

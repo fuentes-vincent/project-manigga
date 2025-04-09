@@ -4,6 +4,7 @@ import { useStore } from '../../stores/Store';
 import TaskColumn from './TaskColumn';
 import HuddlesList from './HuddlesList';
 import AiComponent from './AiComponent';
+import { TaskPage } from '@/components/task/TaskPage';
 import { Sidebar } from '../sidebar';
 import { 
   Calendar, 
@@ -183,60 +184,73 @@ export const ProjectDashboard: React.FC = () => {
         
         {/* Main Scrollable Area (Board + Right Sidebar) */}
         <div className="flex-1 flex overflow-hidden">
-          {/* Project content (Scrollable Board) */}
-          <div className="flex-1 p-6 pt-0 overflow-x-auto">
-            <DndContext
-              sensors={sensors}
-              onDragStart={handleDragStart}
-              onDragEnd={handleDragEnd}
-            >
-              <div className="grid grid-flow-col auto-cols-[minmax(280px,_1fr)] gap-4 h-full pb-4">
-                <div className="h-full">
-                  <TaskColumn 
-                    title="To Do" 
-                    tasks={todoTasks} 
-                    count={todoTasks.length}
-                    status="todo"
-                    onStatusChange={updateTaskStatus}
-                  />
+          {/* Project content (Scrollable based on view) */}
+          <div className="flex-1 p-6 pt-0 overflow-y-auto overflow-x-hidden">
+            {/* Conditional Rendering based on activeView */}
+            {activeView === 'board' && (
+              <DndContext
+                sensors={sensors}
+                onDragStart={handleDragStart}
+                onDragEnd={handleDragEnd}
+              >
+                <div className="grid grid-flow-col auto-cols-[minmax(280px,_1fr)] gap-4 h-full pb-4 overflow-x-auto">
+                  <div className="h-full">
+                    <TaskColumn 
+                      title="To Do" 
+                      tasks={todoTasks} 
+                      count={todoTasks.length}
+                      status="todo"
+                      onStatusChange={updateTaskStatus}
+                    />
+                  </div>
+                  
+                  <div className="h-full">
+                    <TaskColumn 
+                      title="In Progress" 
+                      tasks={inProgressTasks}
+                      status="in-progress" 
+                      count={inProgressTasks.length}
+                      onStatusChange={updateTaskStatus}
+                    />
+                  </div>
+                  
+                  <div className="h-full">
+                    <TaskColumn 
+                      title="Review" 
+                      tasks={reviewTasks}
+                      status="review" 
+                      count={reviewTasks.length}
+                      onStatusChange={updateTaskStatus}
+                    />
+                  </div>
+                  
+                  <div className="h-full">
+                    <TaskColumn 
+                      title="Done" 
+                      tasks={doneTasks}
+                      status="done" 
+                      count={doneTasks.length}
+                      onStatusChange={updateTaskStatus}
+                    />
+                  </div>
                 </div>
                 
-                <div className="h-full">
-                  <TaskColumn 
-                    title="In Progress" 
-                    tasks={inProgressTasks}
-                    status="in-progress" 
-                    count={inProgressTasks.length}
-                    onStatusChange={updateTaskStatus}
-                  />
-                </div>
-                
-                <div className="h-full">
-                  <TaskColumn 
-                    title="Review" 
-                    tasks={reviewTasks}
-                    status="review" 
-                    count={reviewTasks.length}
-                    onStatusChange={updateTaskStatus}
-                  />
-                </div>
-                
-                <div className="h-full">
-                  <TaskColumn 
-                    title="Done" 
-                    tasks={doneTasks}
-                    status="done" 
-                    count={doneTasks.length}
-                    onStatusChange={updateTaskStatus}
-                  />
-                </div>
-              </div>
-              
-              {/* Drag overlay - shows the task being dragged */}
-              <DragOverlay>
-                {activeTask ? <TaskCard task={activeTask} /> : null}
-              </DragOverlay>
-            </DndContext>
+                {/* Drag overlay - shows the task being dragged */}
+                <DragOverlay>
+                  {activeTask ? <TaskCard task={activeTask} /> : null}
+                </DragOverlay>
+              </DndContext>
+            )}
+
+            {/* Use TaskPage for List View */}
+            {activeView === 'list' && (
+              <TaskPage />
+            )}
+
+            {/* Placeholder for Calendar View */}
+            {activeView === 'calendar' && (
+              <div className="text-white">Calendar View Placeholder</div>
+            )}
           </div>
           
           {/* Right sidebar (Hidden on smaller screens) */}
