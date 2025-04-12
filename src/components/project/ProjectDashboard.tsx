@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Task, TaskStatus } from '../../utils/types/project';
 import { useStore } from '../../stores/Store';
 import TaskColumn from './TaskColumn';
@@ -26,6 +26,7 @@ import {
 import TaskCard from './TaskCard';
 import { VideoCallModal } from './VideoCallModal';
 import './project-dashboard.css';
+import { useSearchParams } from 'next/navigation';
 
 export const ProjectDashboard: React.FC = () => {
   const { 
@@ -33,7 +34,23 @@ export const ProjectDashboard: React.FC = () => {
     currentProject, 
     huddles,
     updateTaskStatus,
+    projects,
+    setCurrentProject
   } = useStore();
+  
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get('id');
+
+  // Set current project based on URL query parameter
+  useEffect(() => {
+    if (projectId) {
+      // Find the project with matching ID
+      const project = projects.find(p => p.id === projectId);
+      if (project) {
+        setCurrentProject(projectId);
+      }
+    }
+  }, [projectId, projects, setCurrentProject]);
   
   const [activeTask, setActiveTask] = useState<Task | null>(null);
   const [activeView, setActiveView] = useState<'board' | 'list' | 'calendar'>('board');

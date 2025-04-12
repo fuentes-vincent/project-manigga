@@ -1,49 +1,57 @@
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import { ProjectStatus } from '../../mockData/dashboardData';
 
-const ProjectStatusChart: React.FC = () => {
-  // Mock data for the chart
-  const data = [
-    { name: 'Completed', value: 45, color: '#10b981' },  // green
-    { name: 'In Progress', value: 35, color: '#f59e0b' }, // orange
-    { name: 'Pending', value: 20, color: '#6b7280' }     // gray
-  ];
+interface ProjectStatusChartProps {
+  data?: ProjectStatus[];
+}
+
+// Default data if none is provided
+const defaultData: ProjectStatus[] = [
+  { status: 'Completed', count: 15, color: '#4ade80' },
+  { status: 'In Progress', count: 10, color: '#3b82f6' },
+  { status: 'On Hold', count: 5, color: '#f97316' },
+  { status: 'Cancelled', count: 2, color: '#ef4444' },
+];
+
+const ProjectStatusChart: React.FC<ProjectStatusChartProps> = ({ data = defaultData }) => {
+  // Transform data for the pie chart if needed
+  const formattedData = data.map(item => ({
+    name: item.status,
+    value: item.count,
+    color: item.color
+  }));
   
   return (
     <ResponsiveContainer width="100%" height={300}>
       <PieChart>
         <Pie
-          data={data}
+          data={formattedData}
           cx="50%"
           cy="50%"
-          innerRadius={60}
-          outerRadius={90}
-          paddingAngle={5}
-          dataKey="value"
-          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
           labelLine={false}
+          outerRadius={80}
+          fill="#8884d8"
+          dataKey="value"
+          label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
         >
-          {data.map((entry, index) => (
+          {formattedData.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} />
           ))}
         </Pie>
         <Tooltip 
-          formatter={(value) => [`${value}%`, 'Percentage']}
-          contentStyle={{
-            backgroundColor: '#1f2937',
-            border: 'none',
+          formatter={(value) => [value, 'Projects']}
+          contentStyle={{ 
+            backgroundColor: 'white', 
             borderRadius: '6px',
-            color: '#f3f4f6'
+            borderColor: '#e5e7eb',
+            boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
           }}
         />
-        <Legend 
-          verticalAlign="bottom" 
-          height={36}
-          formatter={(value) => <span style={{ color: '#9ca3af' }}>{value}</span>}
-        />
+        <Legend />
       </PieChart>
     </ResponsiveContainer>
   );
 };
 
-export default ProjectStatusChart; 
+export default ProjectStatusChart;

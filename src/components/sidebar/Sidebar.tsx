@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
   LayoutDashboard,
   FolderOpenDot,
@@ -23,11 +23,20 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import './sidebar.css'
+import { workspacesData } from '../../mockData/workspaceData'
 
 const Sidebar: React.FC = () => {
-  const { currentProject } = useStore()
+  const { currentProject, activeWorkspaceId } = useStore()
   const pathname = usePathname()
   const [isCollapsed, setIsCollapsed] = useState(false)
+  
+  // Find the active workspace by ID, default to first one if not found
+  const activeWorkspace = useMemo(() => {
+    if (activeWorkspaceId) {
+      return workspacesData.find((workspace) => workspace.id === activeWorkspaceId) || workspacesData[0];
+    }
+    return workspacesData && workspacesData.length > 0 ? workspacesData[0] : null;
+  }, [activeWorkspaceId]);
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed)
@@ -35,7 +44,7 @@ const Sidebar: React.FC = () => {
 
   const navItems = [
     { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', pathCheck: '/dashboard' },
-    { href: '/project-lists', icon: Folders, label: 'All Projects', pathCheck: ['/project-lists', '/project-list'] },
+    { href: '/projectLists', icon: Folders, label: 'All Projects', pathCheck: ['/projectLists', '/projectList'] },
     { href: '/project', icon: FolderOpenDot, label: 'Projects', pathCheck: ['/project', '/project-project'] },
     { href: '/huddle', icon: Video, label: 'Huddles', pathCheck: ['/huddles', '/huddle'] },
     { href: '/team', icon: Users, label: 'Team', pathCheck: '/team' },
@@ -55,14 +64,17 @@ const Sidebar: React.FC = () => {
         'bg-gray-800 text-white flex flex-col h-screen border-r border-gray-700 transition-all duration-300 ease-in-out',
         isCollapsed ? 'w-20' : 'w-64'
       )}>
-        {/* TeamSync logo */}
+        {/* Workspace logo */}
         <div className="p-4 flex items-center h-14 border-b border-gray-700">
-          <div className="min-w-[32px] w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center text-white font-bold text-lg mr-2">
-            T
+          <div className={cn(
+            "min-w-[32px] w-8 h-8 rounded-md flex items-center justify-center text-white font-bold text-lg mr-2",
+            activeWorkspace?.color?.replace('bg-', 'bg-') || "bg-blue-600"
+          )}>
+            {activeWorkspace ? activeWorkspace.letter : 'T'}
           </div>
           {!isCollapsed && (
             <span className="font-semibold text-lg whitespace-nowrap overflow-hidden">
-              TeamSync
+              {activeWorkspace ? activeWorkspace.name : 'No Workspace'}
             </span>
           )}
         </div>

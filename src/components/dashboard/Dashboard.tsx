@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { useStore } from '../../stores/Store';
 import { Sidebar } from '../sidebar';
 import { 
@@ -13,20 +13,52 @@ import MetricCard from './MetricCard';
 import RevenueChart from './RevenueChart';
 import ProjectStatusChart from './ProjectStatusChart';
 import RecentActivities from './RecentActivities';
+import { dashboardData, WorkspaceDashboardData } from '../../mockData/dashboardData';
+import { workspacesData, Workspace } from '../../mockData/workspaceData';
 
-export const Dashboard: React.FC = () => {
+interface DashboardProps {
+  workspaceId?: string;
+}
+
+export const Dashboard: React.FC<DashboardProps> = ({ workspaceId }) => {
   // const { projects, tasks } = useStore()
   const [activeTimeframe, setActiveTimeframe] = useState<'1W' | '1M' | '3M' | '1Y'>('1M');
+  const [workspaceData, setWorkspaceData] = useState<WorkspaceDashboardData | null>(null);
+  const [workspace, setWorkspace] = useState<Workspace | null>(null);
   
-  // Mock data for metrics
-  const totalRevenue = 84254;
-  const activeProjects = 45;
-  const taskCompletionPercentage = 92;
-  const teamMembersCount = 16;
+  useEffect(() => {
+    // If workspaceId is provided, find the corresponding dashboard data
+    if (workspaceId) {
+      const data = dashboardData.find(data => data.workspaceId === workspaceId);
+      const workspaceInfo = workspacesData.find(ws => ws.id === workspaceId);
+      setWorkspaceData(data || dashboardData[0]);
+      setWorkspace(workspaceInfo || workspacesData[0]);
+    } else {
+      // Default to first workspace if no ID provided
+      setWorkspaceData(dashboardData[0]);
+      setWorkspace(workspacesData[0]);
+    }
+  }, [workspaceId]);
+  
+  // Use fallback values if workspaceData isn't loaded yet
+  const metrics = workspaceData?.metrics || {
+    totalRevenue: 0,
+    activeProjects: 0,
+    taskCompletion: 0,
+    teamMembers: 0
+  };
   
   const handleTimeframeChange = (timeframe: '1W' | '1M' | '3M' | '1Y') => {
     setActiveTimeframe(timeframe);
   };
+  
+  if (!workspaceData || !workspace) {
+    return (
+      <div className="flex h-screen bg-gray-50 dark:bg-gray-900 items-center justify-center">
+        <p className="text-gray-600 dark:text-gray-300">Loading dashboard...</p>
+      </div>
+    );
+  }
   
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
@@ -34,34 +66,41 @@ export const Dashboard: React.FC = () => {
       
       {/* Main content */}
       <div className="flex-1 overflow-auto p-6">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Good morning, Papi!</h1>
+        <div className="mb-6">
+          <div className={`inline-flex items-center justify-center ${workspace.color} dark:opacity-80 w-10 h-10 rounded-md text-lg font-semibold mr-3`}>
+            {workspace.letter}
+          </div>
+          <span className="text-xl font-semibold text-gray-900 dark:text-white">{workspace.name}</span>
+        </div>
+        
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Dashboard</h1>
         
         {/* Metrics overview */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <MetricCard 
             title="Total Revenue" 
-            value={`$${totalRevenue.toLocaleString()}`} 
+            value={`$${metrics.totalRevenue.toLocaleString()}`} 
             change={24}
             icon={<BarChart3 className="text-blue-500" size={20} />}
           />
           
           <MetricCard 
             title="Active Projects" 
-            value={activeProjects.toString()} 
+            value={metrics.activeProjects.toString()} 
             change={12}
             icon={<Briefcase className="text-purple-500" size={20} />}
           />
           
           <MetricCard 
             title="Task Completion" 
-            value={`${taskCompletionPercentage}%`} 
+            value={`${metrics.taskCompletion}%`} 
             change={8}
             icon={<CheckCircle2 className="text-green-500" size={20} />}
           />
           
           <MetricCard 
             title="Team Members" 
-            value={teamMembersCount.toString()} 
+            value={metrics.teamMembers.toString()} 
             change={2}
             icon={<Users className="text-orange-500" size={20} />}
           />
@@ -99,12 +138,12 @@ export const Dashboard: React.FC = () => {
                 </button>
               </div>
             </div>
-            <RevenueChart />
+            <RevenueChart data={workspaceData.revenueData} />
           </div>
           
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
             <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Project Status</h2>
-            <ProjectStatusChart />
+            <ProjectStatusChart data={workspaceData.projectStatus} />
           </div>
         </div>
         
@@ -113,11 +152,11 @@ export const Dashboard: React.FC = () => {
           <div className="p-4 border-b border-gray-200 dark:border-gray-700">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Recent Activities</h2>
           </div>
-          <RecentActivities />
+          <RecentActivities activities={workspaceData.recentActivities} />
         </div>
       </div>
     </div>
   );
 };
 
-export default Dashboard; 
+export default Dashboard;
