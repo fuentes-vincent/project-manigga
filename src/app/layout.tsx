@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Manigga",
+  title: "Sprintify",
   description: "Your number one trusted platform",
 };
 

@@ -24,7 +24,7 @@ export function LoginForm() {
       <div className="hidden lg:flex w-1/2 flex-col bg-blue-50 dark:bg-blue-950 p-10">
         <div className="flex justify-between items-center mb-2">
           <div>
-            <h2 className="text-2xl font-bold text-foreground">Welcome to Manigga</h2>
+            <h2 className="text-2xl font-bold text-foreground">Welcome to Sprintify</h2>
             <p className="text-muted-foreground">Your number one trusted platform</p>
           </div>
         </div>
@@ -46,33 +46,40 @@ export function LoginForm() {
 
       {/* Right side - form */}
       <div className="flex flex-1 items-center justify-center p-6 bg-background">
-        <div className="w-full max-w-md">
-          <div className="flex justify-end mb-4 lg:hidden">
-          </div>
-          <div className="mb-8">
+        <div className="w-full max-w-md space-y-8">
+          <div className="text-center lg:text-left">
             <Tabs defaultValue="login" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-4 bg-muted/40 dark:bg-muted/20">
+              <TabsList className="inline-flex h-12 items-center justify-center rounded-lg bg-muted/40 dark:bg-muted/20 p-1 w-full">
                 <TabsTrigger 
                   value="login" 
-                  className="data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 dark:data-[state=active]:border-blue-400"
+                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md px-6 py-2.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-sm flex-1"
                 >
                   Log In
                 </TabsTrigger>
-                <TabsTrigger value="signup">Sign Up</TabsTrigger>
+                <TabsTrigger 
+                  value="signup"
+                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md px-6 py-2.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-sm flex-1"
+                >
+                  Sign Up
+                </TabsTrigger>
               </TabsList>
-              <TabsContent value="login">
-                <h2 className="text-2xl font-bold mb-1 text-foreground">Welcome back</h2>
-                <p className="text-muted-foreground mb-6">Please enter your details</p>
+              <TabsContent value="login" className="mt-6">
+                <div className="space-y-2">
+                  <h2 className="text-2xl font-bold text-foreground">Welcome back</h2>
+                  <p className="text-muted-foreground">Please enter your details</p>
+                </div>
               </TabsContent>
-              <TabsContent value="signup">
-                <h2 className="text-2xl font-bold mb-1 text-foreground">Create an account</h2>
-                <p className="text-muted-foreground mb-6">Enter your details to get started</p>
+              <TabsContent value="signup" className="mt-6">
+                <div className="space-y-2">
+                  <h2 className="text-2xl font-bold text-foreground">Create an account</h2>
+                  <p className="text-muted-foreground">Enter your details to get started</p>
+                </div>
               </TabsContent>
             </Tabs>
           </div>
           
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div className="space-y-1.5">
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-medium text-foreground">Email</label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
@@ -93,7 +100,7 @@ export function LoginForm() {
               </div>
             </div>
             
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               <label htmlFor="password" className="text-sm font-medium text-foreground">Password</label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
@@ -120,12 +127,13 @@ export function LoginForm() {
                   id="remember" 
                   checked={rememberMe}
                   onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+                  className="h-4 w-4 rounded border border-input"
                 />
                 <label htmlFor="remember" className="text-sm font-medium text-foreground">
                   Remember me
                 </label>
               </div>
-              <a href="#" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
+              <a href="#" className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline">
                 Forgot password?
               </a>
             </div>
@@ -134,17 +142,17 @@ export function LoginForm() {
               Log In
             </Button>
             
-            <div className="relative my-6">
+            <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <span className="w-full border-t border-border" />
               </div>
-              <div className="relative flex justify-center text-xs">
+              <div className="relative flex justify-center text-xs uppercase">
                 <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
               </div>
             </div>
             
-            <div className="grid gap-2">
-              <Button variant="outline" type="button" className="flex items-center justify-center gap-2 border-border">
+            <div className="grid gap-3">
+              <Button variant="outline" type="button" className="flex items-center justify-center gap-2 border-border hover:bg-muted/50">
                 <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 24 24">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
                   <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -153,7 +161,7 @@ export function LoginForm() {
                 </svg>
                 Continue with Google
               </Button>
-              <Button variant="outline" type="button" className="flex items-center justify-center gap-2 border-border">
+              <Button variant="outline" type="button" className="flex items-center justify-center gap-2 border-border hover:bg-muted/50">
                 <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.6 13.8c0-3 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.4-4.4-2.4-1.9-.2-3.6 1.1-4.6 1.1-.9 0-2.4-1.1-4-1-2 0-3.9 1.2-5 3-2.1 3.7-.5 9.1 1.5 12.1 1 1.5 2.2 3.1 3.8 3 1.5-.1 2.1-1 3.9-1s2.4 1 4 1 2.7-1.5 3.7-2.9c1.2-1.7 1.6-3.3 1.7-3.4-.1-.1-3.2-1.3-3.2-4.9zm-3-9c.8-1 1.4-2.4 1.2-3.8-1.2.1-2.6.8-3.5 1.8-.8.9-1.4 2.3-1.3 3.7 1.4.1 2.8-.7 3.6-1.7z" />
                 </svg>
