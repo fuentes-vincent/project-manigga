@@ -197,6 +197,35 @@ export const teamData: TeamData = {
       ],
       projects: 3,
       lastActive: "4 hours ago"
+    },
+    {
+      id: "t7",
+      name: "R & D Development",
+      category: "Engineering",
+      icon: "📊",
+      backgroundColor: "#8B5CF6",
+      members: [
+        {
+          id: "u16",
+          name: "Raj Patel",
+          avatar: "/images/boy.jpg",
+          role: "Data Scientist"
+        },
+        {
+          id: "u17",
+          name: "Emma Wilson",
+          avatar: "/images/girl-cry.jpg",
+          role: "Data Analyst"
+        },
+        {
+          id: "u18",
+          name: "Daniel Lee",
+          avatar: "/images/boy.jpg",
+          role: "Machine Learning Engineer"
+        }
+      ],
+      projects: 3,
+      lastActive: "4 hours ago"
     }
   ]
 };
