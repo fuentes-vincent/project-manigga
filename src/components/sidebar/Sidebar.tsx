@@ -39,7 +39,7 @@ const Sidebar: React.FC = () => {
     { href: '/project', icon: FolderOpenDot, label: 'Projects', pathCheck: ['/project', '/project-project'] },
     { href: '/huddle', icon: Video, label: 'Huddles', pathCheck: ['/huddles', '/huddle'] },
     { href: '/team', icon: Users, label: 'Team', pathCheck: '/team' },
-    { href: '/settings', icon: Settings, label: 'Settings', pathCheck: '/settings' },
+    { href: '/settings', icon: Settings, label: 'Settings', pathCheck: '/settings' }
   ]
 
   const isActive = (pathCheck: string | string[]) => {
