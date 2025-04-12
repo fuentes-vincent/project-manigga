@@ -20,7 +20,7 @@ const HuddleCard: React.FC<HuddleCardProps> = ({
   participants 
 }) => {
   return (
-    <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+    <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow">
       {/* Time with clock icon */}
       <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-1">
         <Clock className="h-4 w-4" />

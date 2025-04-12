@@ -19,7 +19,7 @@ const RecordingCard: React.FC<RecordingCardProps> = ({
   thumbnail 
 }) => {
   return (
-    <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+    <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow">
       {thumbnail && (
         <div className="mb-3 relative">
           <Image 
